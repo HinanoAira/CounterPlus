@@ -227,8 +227,6 @@ class CountersList extends HookConsumerWidget {
             decoration: const InputDecoration(
               hintText: "たいとる",
             ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (value) => text = value,
             controller: TextEditingController(text: beforeText),
           ),
