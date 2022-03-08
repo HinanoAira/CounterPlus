@@ -66,7 +66,7 @@ class CountersList extends HookConsumerWidget {
 
   Widget _dismissible(Counter counter, BuildContext context, WidgetRef ref) {
     return Dismissible(
-      key: UniqueKey(),
+      key: Key('${counter.id}'),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
           final confirmResult =

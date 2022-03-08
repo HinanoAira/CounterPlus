@@ -11,9 +11,9 @@ final countersViewModelProvider =
 );
 
 void main() {
-  debugPaintSizeEnabled = true;
-  debugPaintPointersEnabled = true;
-  debugPaintLayerBordersEnabled = true;
+  debugPaintSizeEnabled = false;
+  debugPaintPointersEnabled = false;
+  debugPaintLayerBordersEnabled = false;
   runApp(const ProviderScope(
     child: MyApp(),
   ));
