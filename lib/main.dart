@@ -3,17 +3,13 @@ import 'package:counter/counters_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'counter_view_model.dart';
-import 'package:flutter/rendering.dart';
 
 final countersViewModelProvider =
     StateNotifierProvider<CountersViewModel, CountersState>(
   (ref) => CountersViewModel(),
 );
 
-void main() {
-  debugPaintSizeEnabled = false;
-  debugPaintPointersEnabled = false;
-  debugPaintLayerBordersEnabled = false;
+Future<void> main() async {
   runApp(const ProviderScope(
     child: MyApp(),
   ));

@@ -33,7 +33,7 @@ class CountersList extends HookConsumerWidget {
         onPressed: () async {
           String title = await _showCreateCounterDialog(context);
           if (title != "") {
-            ref.watch(countersViewModelProvider.notifier).createCouter(title);
+            ref.read(countersViewModelProvider.notifier).createCouter(title);
           }
         },
         tooltip: 'ついか',
@@ -49,12 +49,6 @@ class CountersList extends HookConsumerWidget {
         (CountersState? state1, CountersState state2) async {
       await writeCounters(state2.countersList);
     });
-
-    readCounters().then((value) {
-      if (value == null) return;
-      ref.watch(countersViewModelProvider.notifier).loadData(value);
-    });
-
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: _countersList.length,
@@ -175,7 +169,7 @@ class CountersList extends HookConsumerWidget {
           ],
         ),
         onTap: () =>
-            ref.watch(countersViewModelProvider.notifier).increment(counter.id),
+            ref.read(countersViewModelProvider.notifier).increment(counter.id),
       ),
     );
   }
@@ -325,6 +319,7 @@ Future<List<Counter>?> readCounters() async {
 
     List<Counter> counters =
         CountersJson.fromJson(jsonDecode(jsonString)).counters;
+
     return counters;
   } catch (e) {
     return null;
@@ -338,7 +333,6 @@ Future<bool> writeCounters(List<Counter> counters) async {
 
     final file = await _localFile;
     await file.writeAsString(jsonString);
-
     return true;
   } catch (e) {
     return false;
