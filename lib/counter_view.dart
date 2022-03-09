@@ -1,11 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:counter/counters_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'main.dart';
 import 'counter.dart';
 
@@ -44,11 +39,9 @@ class CountersList extends HookConsumerWidget {
 
   Widget _buildList(WidgetRef ref) {
     final countersState = ref.watch(countersViewModelProvider);
-    final _countersList = countersState.countersList;
     ref.listen(countersViewModelProvider,
-        (CountersState? state1, CountersState state2) async {
-      await writeCounters(state2.countersList);
-    });
+        (_, next) => ref.read(countersViewModelProvider.notifier).save());
+    final _countersList = countersState.countersList;
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: _countersList.length,
@@ -299,42 +292,5 @@ class CountersList extends HookConsumerWidget {
         });
     if (resalt == null) return false;
     return resalt;
-  }
-}
-
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-  return directory.path;
-}
-
-Future<File> get _localFile async {
-  final path = await _localPath;
-  return File('$path/counters.json');
-}
-
-Future<List<Counter>?> readCounters() async {
-  try {
-    final file = await _localFile;
-    String jsonString = await file.readAsString();
-
-    List<Counter> counters =
-        CountersJson.fromJson(jsonDecode(jsonString)).counters;
-
-    return counters;
-  } catch (e) {
-    return null;
-  }
-}
-
-Future<bool> writeCounters(List<Counter> counters) async {
-  try {
-    CountersJson countersJson = CountersJson(counters);
-    String jsonString = jsonEncode(countersJson.toJson());
-
-    final file = await _localFile;
-    await file.writeAsString(jsonString);
-    return true;
-  } catch (e) {
-    return false;
   }
 }

@@ -1,13 +1,12 @@
 import 'counter.dart';
 import 'counters_state.dart';
-import 'counter_view.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class CountersViewModel extends StateNotifier<CountersState> {
-  CountersViewModel() : super(const CountersState()) {
-    readCounters().then((value) {
-      if (value != null) _loadData(value);
-    });
+  CountersViewModel() : super(CountersState.load());
+
+  void save() {
+    state.save();
   }
 
   void createCouter(String title) {
@@ -54,9 +53,5 @@ class CountersViewModel extends StateNotifier<CountersState> {
   void deleteCounter(int id) {
     final newList = state.countersList.where((e) => e.id != id).toList();
     state = state.copyWith(countersList: newList);
-  }
-
-  void _loadData(List<Counter> data) {
-    state = state.copyWith(countersList: data);
   }
 }

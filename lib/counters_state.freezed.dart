@@ -14,14 +14,23 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+CountersState _$CountersStateFromJson(Map<String, dynamic> json) {
+  return _CountersState.fromJson(json);
+}
+
 /// @nodoc
 class _$CountersStateTearOff {
   const _$CountersStateTearOff();
 
-  _CountersState call({List<Counter> countersList = const <Counter>[]}) {
+  _CountersState call(
+      {List<Counter> countersList = const [Counter(0, 'カウンター', 0)]}) {
     return _CountersState(
       countersList: countersList,
     );
+  }
+
+  CountersState fromJson(Map<String, Object?> json) {
+    return CountersState.fromJson(json);
   }
 }
 
@@ -32,6 +41,7 @@ const $CountersState = _$CountersStateTearOff();
 mixin _$CountersState {
   List<Counter> get countersList => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CountersStateCopyWith<CountersState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -103,24 +113,21 @@ class __$CountersStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CountersState with DiagnosticableTreeMixin implements _CountersState {
-  const _$_CountersState({this.countersList = const <Counter>[]});
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_CountersState extends _CountersState {
+  const _$_CountersState({this.countersList = const [Counter(0, 'カウンター', 0)]})
+      : super._();
+
+  factory _$_CountersState.fromJson(Map<String, dynamic> json) =>
+      _$$_CountersStateFromJson(json);
 
   @JsonKey()
   @override
   final List<Counter> countersList;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CountersState(countersList: $countersList)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CountersState'))
-      ..add(DiagnosticsProperty('countersList', countersList));
   }
 
   @override
@@ -140,10 +147,19 @@ class _$_CountersState with DiagnosticableTreeMixin implements _CountersState {
   @override
   _$CountersStateCopyWith<_CountersState> get copyWith =>
       __$CountersStateCopyWithImpl<_CountersState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CountersStateToJson(this);
+  }
 }
 
-abstract class _CountersState implements CountersState {
+abstract class _CountersState extends CountersState {
   const factory _CountersState({List<Counter> countersList}) = _$_CountersState;
+  const _CountersState._() : super._();
+
+  factory _CountersState.fromJson(Map<String, dynamic> json) =
+      _$_CountersState.fromJson;
 
   @override
   List<Counter> get countersList;
