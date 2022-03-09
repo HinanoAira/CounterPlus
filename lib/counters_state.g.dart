@@ -11,7 +11,7 @@ _$_CountersState _$$_CountersStateFromJson(Map<String, dynamic> json) =>
       countersList: (json['counters_list'] as List<dynamic>?)
               ?.map((e) => Counter.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          const [Counter(0, 'カウンター', 0)],
+          const [],
     );
 
 Map<String, dynamic> _$$_CountersStateToJson(_$_CountersState instance) =>

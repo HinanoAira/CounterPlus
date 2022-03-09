@@ -1,9 +1,18 @@
 import 'counter.dart';
 import 'counters_state.dart';
+import 'counter_saveload.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class CountersViewModel extends StateNotifier<CountersState> {
-  CountersViewModel() : super(CountersState.load());
+  CountersViewModel() : super(const CountersState()) {
+    loadCounters().then((value) {
+      if (value != null) {
+        state = CountersState.fromJson(value);
+      } else {
+        createCouter('カウンター');
+      }
+    });
+  }
 
   void save() {
     state.save();

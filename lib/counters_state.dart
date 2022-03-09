@@ -12,18 +12,11 @@ abstract class CountersState implements _$CountersState {
   // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory CountersState({
-    @Default([Counter(0, 'カウンター', 0)]) List<Counter> countersList,
+    @Default([]) List<Counter> countersList,
   }) = _CountersState;
 
   factory CountersState.fromJson(Map<String, dynamic> json) =>
       _$CountersStateFromJson(json);
-
-  factory CountersState.load() {
-    loadCounters().then((value) {
-      if (value != null) return CountersState.fromJson(value);
-    });
-    return const CountersState();
-  }
 
   Future<bool> save() async {
     return await saveCounters(toJson());

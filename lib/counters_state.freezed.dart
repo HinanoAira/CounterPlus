@@ -22,8 +22,7 @@ CountersState _$CountersStateFromJson(Map<String, dynamic> json) {
 class _$CountersStateTearOff {
   const _$CountersStateTearOff();
 
-  _CountersState call(
-      {List<Counter> countersList = const [Counter(0, 'カウンター', 0)]}) {
+  _CountersState call({List<Counter> countersList = const []}) {
     return _CountersState(
       countersList: countersList,
     );
@@ -115,8 +114,7 @@ class __$CountersStateCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_CountersState extends _CountersState {
-  const _$_CountersState({this.countersList = const [Counter(0, 'カウンター', 0)]})
-      : super._();
+  const _$_CountersState({this.countersList = const []}) : super._();
 
   factory _$_CountersState.fromJson(Map<String, dynamic> json) =>
       _$$_CountersStateFromJson(json);

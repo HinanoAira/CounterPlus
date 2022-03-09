@@ -6,8 +6,7 @@ import 'counter_view_model.dart';
 
 final countersViewModelProvider =
     StateNotifierProvider<CountersViewModel, CountersState>(
-  (ref) => CountersViewModel(),
-);
+        (ref) => CountersViewModel());
 
 Future<void> main() async {
   runApp(const ProviderScope(
