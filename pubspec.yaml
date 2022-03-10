@@ -38,6 +38,8 @@ dependencies:
   flutter_state_notifier: ^0.7.1
   path_provider: ^2.0.9
   freezed_annotation: ^1.1.0
+  universal_platform: ^1.0.0+1
+  universal_html: ^2.0.8
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ dev_dependencies:
   build_runner: ^2.1.7
   freezed: ^1.1.1
   json_serializable: ^6.1.5
+  msix: ^3.3.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -93,3 +96,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+msix_config:
+  display_name: HinaCounterPlus
+  publisher_display_name: HinaSense
+  publisher: CN=94F58232-5F40-4E94-B5C8-4E4A54E0B2F1
+  identity_name: 12165HinaSense.HinaCounterPlus
+  msix_version: 1.0.1.0
+  icons_background_color: "#ffffff"
+  architecture: x64
+  capabilities: "none"
+  languages: ja-jp
+  store: true
